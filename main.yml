@@ -1,26 +1,2 @@
-- hosts: target
-  roles:
-    - timezone
-    - apt-upgrade
-    - packages
-    - dotfiles
-    - emacs
-    - cmigemo
-    - python
-    - source-highlight
-
-- hosts: target
-  become: true
-  tasks:
-    - name: copy 99-bridge.yaml
-      copy:
-        src: 99-bridge.yaml
-        dest: /etc/netplan/99-bridge.yaml
-        owner: root
-        group: root
-        mode: '0644'
-
-    - name: remove 50-cloud-init.yaml
-      file:
-        path: /etc/netplan/50-cloud-init.yaml
-        state: absent
+- import_playbook: regular.yml
+- import_playbook: lxd.yml
