@@ -13,3 +13,25 @@
       file:
         path: /etc/netplan/50-cloud-init.yaml
         state: absent
+
+- hosts: target
+  tasks:
+    - name: make wks directory
+      file:
+        path: ~/wks
+        state: directory
+
+    - name: check out cloud-init
+      git:
+        repo: http://git.tateishi/git/tadatoshi/cloud-init.git
+        dest: ~/wks/cloud-init
+
+    - name: make role directory
+      file:
+        path: ~/.local/lib/ansible
+        state: directory
+
+    - name: check out roles
+      git:
+        repo: https://github.com/tateishi/ansible-roles.git
+        dest: ~/.local/lib/ansible/roles
