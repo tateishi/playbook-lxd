@@ -1,4 +1,8 @@
 - hosts: target
+  roles:
+    - ansible
+
+- hosts: target
   become: true
   tasks:
     - name: copy 99-bridge.yaml
@@ -26,12 +30,9 @@
         repo: http://git.tateishi/git/tadatoshi/cloud-init.git
         dest: ~/wks/cloud-init
 
-    - name: make role directory
-      file:
-        path: ~/.local/lib/ansible
-        state: directory
-
-    - name: check out roles
-      git:
-        repo: https://github.com/tateishi/ansible-roles.git
-        dest: ~/.local/lib/ansible/roles
+    - git:
+        repo: "{{ item.repo }}"
+        dest: "{{ item.dest }}"
+      loop:
+        - repo: https://github.com/tateishi/playbook-work.git
+          dest: "{{ workdir }}/playbook-work"
