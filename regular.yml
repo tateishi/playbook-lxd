@@ -4,7 +4,4 @@
     - apt-upgrade
     - packages
     - dotfiles
-    - emacs
-    - cmigemo
-    - python
     - source-highlight

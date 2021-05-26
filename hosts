@@ -3,3 +3,5 @@
 target:
   hosts:
     lxd01:
+    lxd02:
+    lxd03:
